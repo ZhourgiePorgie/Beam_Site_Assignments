@@ -50,8 +50,6 @@ class Site:
         ret = ""
         ret += "Site name: " + self.name + "\n"
         ret += "Site index: " + str(self.index) + "\n"
-        ret += "Site driving: " + str(self.isDriving) + "\n"
-        ret += "Site spanish speaking: " + str(self.requiresSpanish) + "\n"
         ret += "Site max num: " + str(self.maxNum) + "\n"
         ret += "Members: "
         for member in self.members:
@@ -153,15 +151,13 @@ def recursiveSort(members, sites):
                 members.append(member)
     return False
 
-membersExcel = pd.read_excel("~/Downloads/TempForm(Responses).xlsx") #File path to the excel file of member data
-sitesExcel = pd.read_excel("~/Downloads/Sites.xlsx") #File path to the excel file of site to index mappings
-staffExcel = pd.read_excel("~/Downloads/Site_Leaders.xlsx") #File path to the excel file of staff and site leaders
+membersExcel = pd.read_excel("Excel_Spreadsheets/Availabilities(Responses).xlsx") #File path to the excel file of member data
+siteExcel = pd.read_excel("Excel_Spreadsheets/Sites.xlsx") #File path to the excel file of site to index mappings
+staffExcel = pd.read_excel("Excel_Spreadsheets/Site_Leaders.xlsx") #File path to the excel file of staff and site leaders
 
 #process members
 staffMembers = staffExcel["Staff Members"].tolist()
 siteLeaders = staffExcel[staffExcel["Site Leaders"].notnull().tolist()]["Site Leaders"].tolist()
-
-print(siteLeaders)
 
 members = []
 #Iterate through all members
