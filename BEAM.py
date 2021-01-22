@@ -192,6 +192,7 @@ for ind in membersExcel.index:
     newMember = Member(name, times, site, staff, drive, spanish)
     members.append(newMember)
 
+members.sort(key = lambda x:sum(x.times))
 drivers = createDriversList(members)
 siteLeaders = createSiteLeaderList(members)
 spanishSpeakers = createSpanishList(members)
@@ -202,7 +203,6 @@ spanishSiteNum = 0
 maxNum = len(members) // len(siteExcel.index) + 1 #maximum members per site
 index = 0
 sites = []
-members.sort(key = lambda x:sum(x.times))
 
 for ind in siteExcel.index:
     name = ""
