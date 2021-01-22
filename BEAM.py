@@ -151,6 +151,11 @@ def recursiveSort(members, sites):
                 members.append(member)
     return False
 
+def writeToExcel(sites):
+    data = [[member.name for member in site.members] for site in sites]
+    df = pd.DataFrame(data, index = [site.name for site in sites])
+    df.to_excel("Excel_Spreadsheets/Site_Assignments.xlsx")
+
 membersExcel = pd.read_excel("Excel_Spreadsheets/Availabilities(Responses).xlsx") #File path to the excel file of member data
 siteExcel = pd.read_excel("Excel_Spreadsheets/Sites.xlsx") #File path to the excel file of site to index mappings
 staffExcel = pd.read_excel("Excel_Spreadsheets/Site_Leaders.xlsx") #File path to the excel file of staff and site leaders
@@ -198,8 +203,6 @@ maxNum = len(members) // len(siteExcel.index) + 1 #maximum members per site
 index = 0
 sites = []
 members.sort(key = lambda x:sum(x.times))
-for member in members:
-    print(member)
 
 for ind in siteExcel.index:
     name = ""
@@ -217,11 +220,12 @@ for ind in siteExcel.index:
     newSite = Site(index, name, drive, spanish, maxNum)
     sites.append(newSite)
     index += 1
-    
+
 complete = sort(drivers, spanishSpeakers, siteLeaders, members, sites, driveSiteNum, spanishSiteNum)
 if complete:
     print("sorting complete")
 else:
     print("sorting incomplete")
-for site in sites:
-    print(site)
+
+writeToExcel(sites)
+
