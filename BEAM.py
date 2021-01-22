@@ -197,6 +197,9 @@ spanishSiteNum = 0
 maxNum = len(members) // len(siteExcel.index) + 1 #maximum members per site
 index = 0
 sites = []
+members.sort(key = lambda x:sum(x.times))
+for member in members:
+    print(member)
 
 for ind in siteExcel.index:
     name = ""
